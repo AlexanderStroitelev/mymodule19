@@ -22,9 +22,9 @@ class CartView(TemplateView):
     template_name = 'fourth_task/cart.html'
 
 
-def sign_up_by_django(request) :
+def sign_up_by_django(request):
     info = {}
-    if request.method == "POST" :
+    if request.method == "POST":
         form = UserRegister(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
