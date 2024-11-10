@@ -13,10 +13,9 @@ class GamesView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Получаем все записи из таблицы Game
         games = Game.objects.all()
         context['games'] = games
-        context['purchase_link'] = 'Купить'  # Кнопка для покупки игры
+        context['purchase_link'] = 'Купить'
         return context
 
 class CartView(TemplateView):
@@ -33,7 +32,6 @@ def sign_up_by_django ( request ) :
             repeat_password = form.cleaned_data [ 'repeat_password' ]
             age = form.cleaned_data [ 'age' ]
 
-            # Проверяем, есть ли уже покупатель с таким именем в базе
             if Buyer.objects.filter ( name = username ).exists ( ) :
                 info [ 'error' ] = 'Пользователь уже существует'
             elif password != repeat_password :
@@ -41,7 +39,6 @@ def sign_up_by_django ( request ) :
             elif int ( age ) < 18 :
                 info [ 'error' ] = 'Вы должны быть старше 18'
             else :
-                # Создаем нового покупателя
                 Buyer.objects.create ( name = username , balance = 0.00 , age = age )
                 info [ 'message' ] = f'Приветствуем, {username}!'
 
